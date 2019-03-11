@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
-import Title from "./components/Title";
 import friends from "./friends.json";
 import NavBar from "./components/NavBar";
 
@@ -14,6 +13,7 @@ class App extends Component {
     friends,
     clicked_ids:[],
     score: 0,
+    win: 10,
     message: ""
   };
 
@@ -33,7 +33,7 @@ class App extends Component {
     // checking clicked_ids array to see if it includes the id of the friend clicked
     if(clicked_ids.includes(id)){
       console.log("wrong!")
-      this.setState({ score: 0, message:  "Game Over!" });
+      this.setState({ clicked_ids: [], score: 0, message:  "Game Over!" });
     } else {    
       clicked_ids.push(id);
       this.setState({score: clicked_ids.length})
@@ -50,9 +50,13 @@ class App extends Component {
   render() {
     this.state.friends.sort( () => Math.random() - 0.5)
     return (
+      <div className = "App">
+      <NavBar 
+        total = {this.state.score}
+        message = {this.state.message}
+        win = {this.state.win}
+      />
       <Wrapper>
-        <NavBar />
-        <Title>Friends List</Title>
         {this.state.friends.map(friend => (
           <FriendCard
             id={friend.id}
@@ -65,6 +69,7 @@ class App extends Component {
           />
         ))}
       </Wrapper>
+      </div>
     );
   }
 }
