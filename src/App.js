@@ -13,7 +13,6 @@ class App extends Component {
     friends,
     clicked_ids:[],
     score: 0,
-    win: 10,
     message: ""
   };
 
@@ -36,10 +35,14 @@ class App extends Component {
       this.setState({ clicked_ids: [], score: 0, message:  "Game Over!" });
     } else {    
       clicked_ids.push(id);
-      this.setState({score: clicked_ids.length})
+      this.setState({score: clicked_ids.length, message: "Keep Going"})
+      if (this.state.score === 2){
+        this.setState({ clicked_ids: [], score: 0, message:  "Winner Winner Chicken Dinner!" });
+      }
     }
 
-    console.log('======', clicked_ids);          
+    
+
 
     // run shuffle cards here to limit our onClick prop to only one
     this.shuffle();
