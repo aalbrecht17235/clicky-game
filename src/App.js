@@ -1,26 +1,70 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import FriendCard from "./components/FriendCard";
+import Wrapper from "./components/Wrapper";
+import Title from "./components/Title";
+import friends from "./friends.json";
+import NavBar from "./components/NavBar";
+
 
 class App extends Component {
+
+  
+  // Setting this.state.friends to the friends json array
+  state = {
+    friends,
+    clicked_ids:[],
+    score: 0,
+    message: ""
+  };
+
+  // shuffle cards
+  shuffle = () => {
+    // randomize this.state.friends
+    const friends = this.state.friends.sort( () => Math.random() - 0.5);
+
+    this.setState({ friends });
+  };
+  
+  // Evaluate click
+  pickEval = id => {
+    // storing the clicked_ids state in clicked_ids let
+    let clicked_ids = this.state.clicked_ids;
+    
+    // checking clicked_ids array to see if it includes the id of the friend clicked
+    if(clicked_ids.includes(id)){
+      console.log("wrong!")
+      this.setState({ score: 0, message:  "Game Over!" });
+    } else {    
+      clicked_ids.push(id);
+      this.setState({score: clicked_ids.length})
+    }
+
+    console.log('======', clicked_ids);          
+
+    // run shuffle cards here to limit our onClick prop to only one
+    this.shuffle();
+
+  };
+
+  // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
+    this.state.friends.sort( () => Math.random() - 0.5)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Wrapper>
+        <NavBar />
+        <Title>Friends List</Title>
+        {this.state.friends.map(friend => (
+          <FriendCard
+            id={friend.id}
+            handleClick = {this.pickEval}
+            key={friend.id}
+            name={friend.name}
+            image={friend.image}
+            occupation={friend.occupation}
+            location={friend.location}
+          />
+        ))}
+      </Wrapper>
     );
   }
 }
