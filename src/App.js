@@ -57,7 +57,6 @@ class App extends Component {
       <NavBar 
         total = {this.state.score}
         message = {this.state.message}
-        win = {this.state.win}
       />
       <Wrapper>
         {this.state.friends.map(friend => (
