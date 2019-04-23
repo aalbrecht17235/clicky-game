@@ -1,9 +1,5 @@
 # Clicky Game
 ----------
-## Table of Contents 
-1. [Overview](#overview)
-3. [Technologies](#technologies)
-
 
 <a name="overview"></a>
 ## Overview 
