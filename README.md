@@ -19,7 +19,7 @@ Clicky Game is a React app that tests the users memory by seeing if they can rem
  - CSS
  - Bootstrap 
  
- Play the game here:[https://github.com/aalbrecht17235/clicky-game](https://github.com/aalbrecht17235/clicky-game)
+ Play the game here:[https://limitless-retreat-48720.herokuapp.com/ ](https://limitless-retreat-48720.herokuapp.com/ )
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
